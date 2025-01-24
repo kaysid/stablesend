@@ -1,0 +1,25 @@
+
+.appLogo{
+  width: 250px;
+  
+}
+
+.appHeader {
+  margin-top: 10px;
+  font-size: 3em;
+  justify-self: center;
+  justify-items: center;
+}
+
+.titleSpan {
+  margin-top: 0;
+  font-weight: 700;
+  font-size: 1.5em;
+  background: -webkit-linear-gradient(#ffc400, #e05a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p{
+  margin: 0;
+}
