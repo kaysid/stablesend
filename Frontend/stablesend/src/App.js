@@ -8,6 +8,7 @@ function App() {
         <img src={logo} className="appLogo" alt="logo" />
         <p className="titleSpan">Stablesend</p>
         <button>Register as a Business</button>
+        <button>Wallet Tutorial</button>
       </header>
       
     </div>
