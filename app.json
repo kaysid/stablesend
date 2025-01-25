@@ -14,7 +14,10 @@
           "backgroundColor": "#000000"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "this app uses Face ID and Touch ID to verify the user's identity in order to protect sensitive data and block sensitive data from being manipulating locally."
+      }
     },
     "android": {
       "adaptiveIcon": {
