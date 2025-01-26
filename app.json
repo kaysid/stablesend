@@ -31,16 +31,13 @@
       "favicon": "./assets/images/coinicon.png"
     },
     "plugins": [
-      "expo-router",
       [
-        "expo-splash-screen",
+        "expo-local-authentication",
         {
-          "image": "./assets/images/patrick.jpg",
-          "resizeMode": "cover",
-          "backgroundColor": "#000000"
+          "faceIDPermission": "Allow $(Product_NAME) to use Face ID to access app or change personal information."
         }
       ]
-    ],
+    ], 
     "experiments": {
       "typedRoutes": true
     }
