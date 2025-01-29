@@ -2,14 +2,14 @@ import { StyleSheet } from "react-native";
 import { View, Text } from "react-native";
 import React from "react";
 
-const payment = () => {
+const Payment = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Enter amount</Text>
     </View>
   );
 };
-export default payment;
+export default Payment;
 
 const styles = StyleSheet.create({
   container: {

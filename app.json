@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/patrick.jpg",
+      "image": "./assets/images/coinicon.png",
           "resizeMode": "cover",
           "backgroundColor": "#000000"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/coinicon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -36,6 +36,8 @@
         {
           "faceIDPermission": "Allow $(Product_NAME) to use Face ID to access app or change personal information."
         }
+      ],
+      ["expo-router"
       ]
     ], 
     "experiments": {
