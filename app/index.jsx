@@ -1,7 +1,7 @@
 import React from "react";
-import Navigation from "./navigation";
 import "react-native-gesture-handler";
+import Login from "./screens/login";
 
 export default function App() {
-  return <Navigation />;
+  return <Login />;
 }

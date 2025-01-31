@@ -2,7 +2,6 @@ import Home from "./screens/home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Payment from "./screens/payment";
 import Settings from "./screens/settings";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 //bottom tab
