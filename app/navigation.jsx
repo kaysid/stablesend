@@ -3,11 +3,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Payment from "./screens/payment";
 import Settings from "./screens/settings";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Login from "./screens/login";
 
 //bottom tab
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-function TabGroup(params) {
+function NavBar(params) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -34,6 +37,11 @@ function TabGroup(params) {
   );
 }
 
-export default function Navigation() {
-  return <TabGroup />;
+export default function Navigation(props) {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login}></Stack.Screen>
+      <Stack.Screen name="NavBar" component={NavBar}></Stack.Screen>
+    </Stack.Navigator>
+  );
 }

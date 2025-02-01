@@ -2,9 +2,10 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 const loginImage = require("../../assets/images/coinicon.png");
 import Navigation from "../navigation";
+import "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Login() {
+export default function Login({ navigation }) {
   const checkLocalStorageAddys = async (params) => {
     //user is signed up state check
     const ethAddy = await AsyncStorage.getItem("localEthAddy");
@@ -15,7 +16,7 @@ export default function Login() {
       <Image source={loginImage} style={styles.image} />
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={checkLocalStorageAddys}
+        onPress={() => navigation.navigate("NavBar")}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
