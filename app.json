@@ -5,13 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/coinicon.png",
-    "scheme": "myapp",
+    "scheme": "frontend",
+    "platforms": ["ios","android"],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/coinicon.png",
-          "resizeMode": "cover",
-          "backgroundColor": "#000000"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
@@ -23,7 +24,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/coinicon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ],
+      "package": "com.kaysid.frontend"
     },
     "web": {
       "bundler": "metro",
@@ -37,11 +45,32 @@
           "faceIDPermission": "Allow $(Product_NAME) to use Face ID to access app or change personal information."
         }
       ],
-      ["expo-router"
+      [
+        "expo-router"
+      ],
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
+        }
       ]
-    ], 
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b7f64b50-e18d-495b-bc89-2d7c6e0249ea"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b7f64b50-e18d-495b-bc89-2d7c6e0249ea"
     }
   }
 }
