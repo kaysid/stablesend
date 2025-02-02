@@ -2,22 +2,16 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 const loginImage = require("../../assets/images/coinicon.png");
 import "react-native-gesture-handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function Login({ navigation }) {
-  const checkLocalStorageAddys = async (params) => {
-    //user is signed up state check
-    const ethAddy = await AsyncStorage.getItem("localEthAddy");
-    const solAddy = await AsyncStorage.getItem("localSolAddy");
-  };
+export default function Register({ navigation }) {
   return (
     <View style={styles.container}>
       <Image source={loginImage} style={styles.image} />
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("NavBar")}
+        onPress={() => navigation.navigate("NavBar", { screen: "Settings" })}
       >
-        <Text style={styles.loginText}>Login</Text>
+        <Text style={styles.loginText}>Setup for Business</Text>
       </TouchableOpacity>
     </View>
   );
