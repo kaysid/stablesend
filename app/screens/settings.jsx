@@ -38,16 +38,6 @@ const Settings = () => {
     populateFromLocalStorage();
   }, []);
 
-  useEffect(() => {
-    //making sure stored address updates on variable change
-    storeSol();
-  }, [localSolAddy]);
-
-  useEffect(() => {
-    //making sure stored address updates on variable change
-    storeEth();
-  }, [localEthAddy]);
-
   const storeEth = async (params) => {
     //store eth address to local storage
     try {
@@ -61,6 +51,16 @@ const Settings = () => {
       await AsyncStorage.setItem("localSolAddy", localSolAddy);
     } catch (error) {}
   };
+
+  useEffect(() => {
+    //making sure stored address updates on variable change
+    storeSol();
+  }, [localSolAddy]);
+
+  useEffect(() => {
+    //making sure stored address updates on variable change
+    storeEth();
+  }, [localEthAddy]);
 
   const clearAddresses = async (params) => {
     //clear from both local storage
