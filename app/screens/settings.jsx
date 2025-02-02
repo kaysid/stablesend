@@ -88,10 +88,7 @@ const Settings = () => {
           onChangeText={onChangeTextEth}
           value={localEthAddy}
         ></TextInput>
-        <TouchableOpacity
-          style={styles.touchableO}
-          onPress={pasteClipboardEth()}
-        >
+        <TouchableOpacity style={styles.touchableO} onPress={pasteClipboardEth}>
           <Feather name="clipboard" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -106,10 +103,7 @@ const Settings = () => {
           onChangeText={onChangeTextSol}
           value={localSolAddy}
         ></TextInput>
-        <TouchableOpacity
-          style={styles.touchableO}
-          onPress={pasteClipboardSol()}
-        >
+        <TouchableOpacity style={styles.touchableO} onPress={pasteClipboardSol}>
           <Feather name="clipboard" size={24} color="black" />
         </TouchableOpacity>
       </View>
