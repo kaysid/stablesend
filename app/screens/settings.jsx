@@ -1,32 +1,42 @@
 import { StyleSheet, TextInput, Text, Button, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Clipboard from "expo-clipboard";
 
 const Settings = () => {
   const [localEthAddy, onChangeTextEth] = React.useState();
   const [localSolAddy, onChangeTextSol] = React.useState();
+  const [clipboardText, setClipboardText] = useState(""); //need to implement paste button
 
   const populateFromLocalStorage = async (params) => {
-    //all functionality of this screen is done except for repopulation of text fields after page refresh. states seem to get stuck on populated or empty (unable to type). dont know how to fix yet
+    //populate from asyncStorage to text input fields
     const ethAddy = await AsyncStorage.getItem("localEthAddy");
     const solAddy = await AsyncStorage.getItem("localSolAddy");
     onChangeTextEth(ethAddy);
     onChangeTextSol(solAddy);
   };
 
+  useEffect(() => {
+    //wait for comp to mount before calling
+    populateFromLocalStorage();
+  }, []);
+
   const storeEth = async (params) => {
+    //store eth address to local storage
     try {
       await AsyncStorage.setItem("localEthAddy", localEthAddy);
     } catch (error) {}
   };
 
   const storeSol = async (params) => {
+    //store sol address to local storage
     try {
       await AsyncStorage.setItem("localSolAddy", localSolAddy);
     } catch (error) {}
   };
 
   const clearAddresses = async (params) => {
+    //clear from both local storage
     await AsyncStorage.clear();
     onChangeTextEth("");
     onChangeTextSol("");
@@ -34,6 +44,7 @@ const Settings = () => {
   };
 
   const print = async (params) => {
+    //for dev use only
     const keys = await AsyncStorage.getAllKeys();
     console.log(await AsyncStorage.multiGet(keys));
   };
@@ -48,6 +59,7 @@ const Settings = () => {
         onChangeText={onChangeTextEth}
         value={localEthAddy}
       ></TextInput>
+      {/* <Button onPress={handlePaste} title="Paste"></Button> */}
       <Button onPress={storeEth} title="Save"></Button>
       <Text style={styles.textLabel}>Solana Network:</Text>
       <TextInput
