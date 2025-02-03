@@ -5,8 +5,8 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/coinicon.png",
-    "scheme": "frontend",
-    "platforms": ["ios","android"],
+    "scheme": "stablesend",
+    "platforms": ["ios","android", "web"],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
