@@ -12,8 +12,8 @@ import * as Clipboard from "expo-clipboard";
 import Feather from "@expo/vector-icons/Feather";
 
 const Settings = () => {
-  const [localEthAddy, onChangeTextEth] = React.useState();
-  const [localSolAddy, onChangeTextSol] = React.useState();
+  const [localEthAddy, onChangeTextEth] = React.useState("");
+  const [localSolAddy, onChangeTextSol] = React.useState("");
 
   const pasteClipboardEth = async () => {
     const s = await Clipboard.getStringAsync();
@@ -25,17 +25,22 @@ const Settings = () => {
     onChangeTextSol(s);
   };
 
-  const populateFromLocalStorage = async (params) => {
+  const populateFromLocalStorageEth = async (params) => {
     //populate from asyncStorage to text input fields
     const ethAddy = await AsyncStorage.getItem("localEthAddy");
-    const solAddy = await AsyncStorage.getItem("localSolAddy");
     onChangeTextEth(ethAddy);
+  };
+
+  const populateFromLocalStorageSol = async (params) => {
+    //populate from asyncStorage to text input fields
+    const solAddy = await AsyncStorage.getItem("localSolAddy");
     onChangeTextSol(solAddy);
   };
 
   useEffect(() => {
     //wait for comp to mount before calling
-    populateFromLocalStorage();
+    populateFromLocalStorageEth();
+    populateFromLocalStorageSol();
   }, []);
 
   const storeEth = async (params) => {
