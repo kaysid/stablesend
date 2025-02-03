@@ -28,10 +28,12 @@ const Settings = () => {
   };
 
   const formatWalletAddress = (address) => {
-    if (screenWidth < 600) {
+    if (screenWidth < 500) {
       if (!address) return ""; //null check
 
       return `${address.slice(0, 8)}....${address.slice(-8)}`;
+    } else {
+      return address;
     }
   };
 
