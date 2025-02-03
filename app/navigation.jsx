@@ -58,7 +58,6 @@ export default function Navigation(props) {
 
   const checkAuth = async (params) => {
     const isAuthenticated = await localAuth();
-    console.log(isAuthenticated);
     setIsAuthenticated(isAuthenticated);
   };
 

@@ -4,16 +4,14 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/coinicon.png",
     "scheme": "stablesend",
-    "platforms": ["ios","android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/images/coinicon.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#000000"
-    },
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -53,7 +51,9 @@
         {
           "launchMode": "most-recent"
         }
-      ]
+      ],
+      "expo-asset"
+      
     ],
     "experiments": {
       "typedRoutes": true
@@ -66,9 +66,7 @@
         "projectId": "b7f64b50-e18d-495b-bc89-2d7c6e0249ea"
       }
     },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "1.0.0",
     "updates": {
       "url": "https://u.expo.dev/b7f64b50-e18d-495b-bc89-2d7c6e0249ea"
     }
