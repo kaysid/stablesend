@@ -5,15 +5,17 @@ import {
   Button,
   View,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import Feather from "@expo/vector-icons/Feather";
 
 const Settings = () => {
-  const [localEthAddy, onChangeTextEth] = React.useState("");
-  const [localSolAddy, onChangeTextSol] = React.useState("");
+  const [localEthAddy, onChangeTextEth] = useState("");
+  const [localSolAddy, onChangeTextSol] = useState("");
+  const screenWidth = Dimensions.get("window").width;
 
   const pasteClipboardEth = async () => {
     const s = await Clipboard.getStringAsync();
@@ -23,6 +25,14 @@ const Settings = () => {
   const pasteClipboardSol = async () => {
     const s = await Clipboard.getStringAsync();
     onChangeTextSol(s);
+  };
+
+  const formatWalletAddress = (address) => {
+    if (screenWidth < 600) {
+      if (!address) return ""; //null check
+
+      return `${address.slice(0, 8)}....${address.slice(-8)}`;
+    }
   };
 
   const populateFromLocalStorageEth = async (params) => {
@@ -67,12 +77,14 @@ const Settings = () => {
     storeEth();
   }, [localEthAddy]);
 
-  const clearAddresses = async (params) => {
-    //clear from both local storage
-    await AsyncStorage.clear();
+  const clearEthAddy = async (params) => {
+    await AsyncStorage.removeItem("localEthAddy");
     onChangeTextEth("");
+  };
+
+  const clearSolAddy = async (params) => {
+    await AsyncStorage.removeItem("localSolAddy");
     onChangeTextSol("");
-    console.log(await AsyncStorage.getAllKeys());
   };
 
   const print = async (params) => {
@@ -91,10 +103,13 @@ const Settings = () => {
           placeholder="Etherum USDC Receiving Address"
           placeholderTextColor={"gray"}
           onChangeText={onChangeTextEth}
-          value={localEthAddy}
+          value={formatWalletAddress(localEthAddy)}
         ></TextInput>
         <TouchableOpacity style={styles.touchableO} onPress={pasteClipboardEth}>
           <Feather name="clipboard" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.touchableO} onPress={clearEthAddy}>
+          <Feather name="x" size={24} color="black" />
         </TouchableOpacity>
       </View>
 
@@ -106,14 +121,16 @@ const Settings = () => {
           placeholder="Solana USDC Receiving Address"
           placeholderTextColor={"gray"}
           onChangeText={onChangeTextSol}
-          value={localSolAddy}
+          value={formatWalletAddress(localSolAddy)}
         ></TextInput>
         <TouchableOpacity style={styles.touchableO} onPress={pasteClipboardSol}>
           <Feather name="clipboard" size={24} color="black" />
         </TouchableOpacity>
+        <TouchableOpacity style={styles.touchableO} onPress={clearSolAddy}>
+          <Feather name="x" size={24} color="black" />
+        </TouchableOpacity>
       </View>
 
-      <Button onPress={clearAddresses} title="Clear Addresses"></Button>
       <Button onPress={print} title="print"></Button>
     </View>
   );
