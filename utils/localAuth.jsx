@@ -1,13 +1,15 @@
 import * as LocalAuthentication from "expo-local-authentication";
 
-const localAuth = async () => {
+export default async function localAuth() {
   try {
-    const res = await LocalAuthentication.authenticateAsync();
-    return res;
+    const res = await LocalAuthentication.authenticateAsync({
+      promptMessage: "Authenticate please",
+      cancelLabel: "Cancel",
+    });
+    console.log(res);
+    return res.success;
   } catch (error) {
-    console.error("localAuth error:", error);
-    return false;
+    console.error("Authentication Error:", error);
+    return false; // Return false on error
   }
-};
-
-export default localAuth;
+}

@@ -7,6 +7,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Register from "./screens/register";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect } from "react";
+import localAuth from "../utils/localAuth";
+import {
+  Text,
+  View,
+  ActivityIndicator,
+  Button,
+  StyleSheet,
+} from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,24 +52,50 @@ function NavBar(params) {
 }
 
 export default function Navigation(props) {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   //checks if there are saved addresses in AsyncStorage and if so, continue to home page instead of registration page
   const [registeredCheck, setRegisteredCheck] = useState(null);
 
-  const checkLocalStorageAddys = async () => {
-    //get status from local
-    const res = await AsyncStorage.multiGet(["localEthAddy", "localSolAddy"]);
-    res[0][1] != null || res[1][1] != null
-      ? setRegisteredCheck(true)
-      : console.log(false);
+  const checkAuth = async (params) => {
+    const isAuthenticated = await localAuth();
+    console.log(isAuthenticated);
+    setIsAuthenticated(isAuthenticated);
   };
 
   useEffect(() => {
-    //call async function when component mounts
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    const checkLocalStorageAddys = async () => {
+      //get status from local
+      const res = await AsyncStorage.multiGet(["localEthAddy", "localSolAddy"]);
+      setRegisteredCheck(res[0][1] != null || res[1][1] != null);
+    };
     checkLocalStorageAddys();
   }, []);
 
+  if (isAuthenticated === null) {
+    //loading screen
+    return (
+      <View style={styles.failScreens}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
+  if (!isAuthenticated) {
+    //if failed auth
+    return (
+      <View style={styles.failScreens}>
+        <Text>Authentication Required</Text>
+        <Button onPress={checkAuth} title="Try Again"></Button>
+      </View>
+    );
+  }
+
   return (
-    //conditionally render just the navbar or navbar and register screen
+    //conditionally render just the navbar or navbar and register screen if auth is successful
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {registeredCheck ? (
         <Stack.Screen name="NavBar" component={NavBar}></Stack.Screen>
@@ -74,3 +108,12 @@ export default function Navigation(props) {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  failScreens: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+  },
+});
