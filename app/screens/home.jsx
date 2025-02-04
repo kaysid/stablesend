@@ -5,11 +5,7 @@ import { Image } from "expo-image";
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Image
-        contentFit="cover"
-        style={styles.image}
-        source={require("../../assets/images/itsy.gif")}
-      ></Image>
+      <Text>Home</Text>
     </View>
   );
 }

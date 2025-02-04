@@ -52,18 +52,7 @@ function NavBar(params) {
 }
 
 export default function Navigation(props) {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-  //checks if there are saved addresses in AsyncStorage and if so, continue to home page instead of registration page
   const [registeredCheck, setRegisteredCheck] = useState(null);
-
-  const checkAuth = async (params) => {
-    const isAuthenticated = await localAuth();
-    setIsAuthenticated(isAuthenticated);
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
 
   useEffect(() => {
     const checkLocalStorageAddys = async () => {
@@ -73,25 +62,6 @@ export default function Navigation(props) {
     };
     checkLocalStorageAddys();
   }, []);
-
-  if (isAuthenticated === null) {
-    //loading screen
-    return (
-      <View style={styles.failScreens}>
-        <ActivityIndicator size="large" color="black" />
-      </View>
-    );
-  }
-
-  if (!isAuthenticated) {
-    //if failed auth
-    return (
-      <View style={styles.failScreens}>
-        <Text>Authentication Required</Text>
-        <Button onPress={checkAuth} title="Try Again"></Button>
-      </View>
-    );
-  }
 
   return (
     //conditionally render just the navbar or navbar and register screen if auth is successful
