@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
 import Feather from "@expo/vector-icons/Feather";
+import localAuth from "../../utils/localAuth";
 
 const Settings = () => {
   const [localEthAddy, onChangeTextEth] = useState("");
@@ -19,12 +20,22 @@ const Settings = () => {
 
   const pasteClipboardEth = async () => {
     const s = await Clipboard.getStringAsync();
-    onChangeTextEth(s);
+    let res = null;
+    localEthAddy == null || localEthAddy == ""
+      ? onChangeTextEth(s)
+      : (res = await localAuth());
+
+    res ? onChangeTextEth(s) : console.log("auth failed");
   };
 
   const pasteClipboardSol = async () => {
     const s = await Clipboard.getStringAsync();
-    onChangeTextSol(s);
+    let res = null;
+    localSolAddy == null || localSolAddy == ""
+      ? onChangeTextSol(s)
+      : (res = await localAuth());
+
+    res ? onChangeTextSol(s) : console.log("auth failed");
   };
 
   const formatWalletAddress = (address) => {
@@ -80,13 +91,25 @@ const Settings = () => {
   }, [localEthAddy]);
 
   const clearEthAddy = async (params) => {
-    await AsyncStorage.removeItem("localEthAddy");
-    onChangeTextEth("");
+    let res = await localAuth();
+
+    if (res) {
+      await AsyncStorage.removeItem("localEthAddy");
+      onChangeTextEth("");
+    } else {
+    }
+    console.log("auth failed");
   };
 
   const clearSolAddy = async (params) => {
-    await AsyncStorage.removeItem("localSolAddy");
-    onChangeTextSol("");
+    let res = await localAuth();
+
+    if (res) {
+      await AsyncStorage.removeItem("localSolAddy");
+      onChangeTextSol("");
+    } else {
+    }
+    console.log("auth failed");
   };
 
   const print = async (params) => {
