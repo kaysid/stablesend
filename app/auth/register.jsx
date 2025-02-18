@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React from "react";
 const loginImage = require("../../assets/images/coinicon.png");
-import "react-native-gesture-handler";
 
 export default function Register({ navigation }) {
   return (
@@ -9,7 +8,7 @@ export default function Register({ navigation }) {
       <Image source={loginImage} style={styles.image} />
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("NavBar", { screen: "Settings" })}
+        onPress={() => navigation.navigate("Payment")} // Navigating to Payment screen inside Tab
       >
         <Text style={styles.loginText}>Setup for Business</Text>
       </TouchableOpacity>
