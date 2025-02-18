@@ -26,7 +26,7 @@ const Settings = () => {
       ? onChangeTextEth(s)
       : (res = await localAuth());
 
-    res ? onChangeTextEth(s) : console.log("auth failed");
+    res && onChangeTextEth(s);
   };
 
   const pasteClipboardSol = async () => {
@@ -36,7 +36,7 @@ const Settings = () => {
       ? onChangeTextSol(s)
       : (res = await localAuth());
 
-    res ? onChangeTextSol(s) : console.log("auth failed");
+    res && onChangeTextSol(s);
   };
 
   const formatWalletAddress = (address) => {
@@ -98,8 +98,8 @@ const Settings = () => {
       await AsyncStorage.removeItem("localEthAddy");
       onChangeTextEth("");
     } else {
+      console.log("auth failed");
     }
-    console.log("auth failed");
   };
 
   const clearSolAddy = async (params) => {
@@ -109,8 +109,8 @@ const Settings = () => {
       await AsyncStorage.removeItem("localSolAddy");
       onChangeTextSol("");
     } else {
+      console.log("auth failed");
     }
-    console.log("auth failed");
   };
 
   const print = async (params) => {
