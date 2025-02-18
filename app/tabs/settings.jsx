@@ -119,6 +119,11 @@ const Settings = () => {
     console.log(await AsyncStorage.multiGet(keys));
   };
 
+  const clear = async (params) => {
+    //for dev use only
+    const clearAll = await AsyncStorage.clear();
+  };
+
   return (
     <SafeAreaView>
       <View>
@@ -165,6 +170,7 @@ const Settings = () => {
         </View>
 
         <Button onPress={print} title="print"></Button>
+        <Button onPress={clear} title="clear"></Button>
       </View>
     </SafeAreaView>
   );
