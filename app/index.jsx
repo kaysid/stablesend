@@ -1,6 +1,5 @@
-import React from "react";
-import "react-native-gesture-handler";
-import Navigation from "./navigation";
-export default function App() {
-  return <Navigation />;
+import { Redirect } from "expo-router";
+
+export default function Index() {
+  return <Redirect href="/tabs/" />;
 }
